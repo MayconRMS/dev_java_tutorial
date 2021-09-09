@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//Convert Objecto e soma os produtos
 public class Java {
 
 	public static void main(String[] args) {
@@ -18,17 +19,17 @@ public class Java {
 
 		Stream<SoldProduct> products = listSoldProduct.stream();
 
-		products =  new ArrayList<SoldProduct>().stream();
-		
+
 		List<SimpleSoldProduct> result = new ArrayList<>();
 		BigDecimal total = new BigDecimal(0);
 
-		if (products != null) {
+		if (products != null || listSoldProduct.size() > 0) {
 			result = products.map(temp -> {
 				return new SimpleSoldProduct(temp.getName(), temp.getPrice());
 			}).collect(Collectors.toList());
 
 			total = result.stream().map(item -> item.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+			
 		}
 
 		SoldProductsAggregate soldProductsAggregate = new SoldProductsAggregate(result, total);
